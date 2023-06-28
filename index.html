@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MakeUp Catalogue</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">MakeUp<br />Catalogue</div>
+      <div class="input-nome">
+        <input
+          name="nome"
+          id="nomeInput"
+          placeholder="Procure pelo nome"
+          oninput="filterByValues()"
+        />
+      </div>
+    </div>
+    <div class="inputs">
+      <div class="input">
+        <label for="brands">Marca</label>
+        <select name="brands" id="brandOptions" onchange="filterByValues()">
+          <option value="all">Todos</option>
+        </select>
+      </div>
+      <div class="input">
+        <label for="types">Tipo</label>
+        <select name="types" id="typeOptions" onchange="filterByValues()">
+          <option value="all">Todos</option>
+        </select>
+      </div>
+      <div class="input">
+        <label for="order">Ordem</label>
+        <select name="order" id="orderOptions" onchange="filterByValues()">
+          <option value="all">Todos</option>
+        </select>
+      </div>
+    </div>
+    <div class="items" id="items"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
