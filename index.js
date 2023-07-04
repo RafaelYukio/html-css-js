@@ -52,13 +52,15 @@ function createItemComponent(id, imgSrc, title, brand, price) {
     clickDetails(itemDiv);
   };
 
+  let itemDivWrapper = document.createElement("div");
+
   let img = document.createElement("img");
   img.classList = "item-img";
   img.src = imgSrc;
   img.alt = "product image";
   img.onerror = () => (img.src = "onerror.png");
 
-  itemDiv.appendChild(img);
+  itemDivWrapper.appendChild(img);
 
   let itemDetailsDiv = document.createElement("div");
   itemDetailsDiv.classList = "item-details";
@@ -87,7 +89,9 @@ function createItemComponent(id, imgSrc, title, brand, price) {
   itemDetailsDiv.appendChild(itemDetailsTitleDiv);
   itemDetailsDiv.appendChild(itemDetailsBottomDiv);
 
-  itemDiv.appendChild(itemDetailsDiv);
+  itemDivWrapper.appendChild(itemDetailsDiv);
+
+  itemDiv.appendChild(itemDivWrapper);
 
   return itemDiv;
 }
@@ -109,6 +113,9 @@ function createClickedItemComponent(
   img.src = imgSrc;
   img.alt = "product image";
   img.onerror = () => (img.src = "onerror.png");
+  itemDiv.onclick = (itemDiv) => {
+    clickReturnDetails(itemDiv);
+  };
 
   itemDiv.appendChild(img);
 
@@ -189,18 +196,26 @@ function clickDetails(element) {
       item.product_type
     )
   );
+}
 
-  let teste = createClickedItemComponent(
+function clickReturnDetails(element) {
+  let itemDiv = element.target.closest(".item");
+  let clickedElementId = itemDiv.id;
+
+  let item = productsFiltered.find(
+    (item) => item.id.toString() == clickedElementId
+  );
+
+  itemDiv.innerHTML = "";
+  createItemComponent(
+    clickedElementId,
     item.image_link,
     item.name,
     item.brand,
-    item.price,
-    item.rating,
-    item.category,
-    item.product_type
-  );
-
-  console.log(teste.children);
+    item.price
+  ).childNodes.forEach((child) => {
+    itemDiv.appendChild(child);
+  });
 }
 
 function renderItems(items, itemStartPagination, itemEndPagination) {

@@ -114,8 +114,17 @@ body {
   border-radius: 6px;
 }
 
+.item :hover {
+  transform: scale(1.025);
+}
+
+.item div > * {
+  pointer-events: none;
+}
+
 .item-img,
 .item-img-click {
+  display: flex;
   margin: 0 auto;
   height: 220px;
   object-position: center;
